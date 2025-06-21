@@ -5,11 +5,26 @@
   "exports": {
     "./*": "./dist/*",
     "./src/*": "./src/*",
-    "./database": "./dist/database.js",
-    "./fetcher": "./dist/fetcher.js",
-    "./react": "./dist/react.js",
-    "./next": "./dist/next.js",
-    "./server": "./dist/server.js"
+    "./database": {
+      "import": "./dist/database.js",
+      "types": "./dist/database.d.ts"
+    },
+    "./fetcher": {
+      "import": "./dist/fetcher.js",
+      "types": "./dist/fetcher.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react.js",
+      "types": "./dist/react.d.ts"
+    },
+    "./next": {
+      "import": "./dist/next.js",
+      "types": "./dist/next.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server.js",
+      "types": "./dist/server.d.ts"
+    }
   },
   "scripts": {
     "build": "tsc"
