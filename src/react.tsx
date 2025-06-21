@@ -2,13 +2,13 @@
 // Works
 import z from 'zod'
 import fetcher from './fetcher'
-import { useIndex } from 'asasvirtuais-react/hooks'
+import { useIndex } from 'asasvirtuais-react/src/hooks'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { FieldsProvider } from 'asasvirtuais-react/fields'
-import { FormProvider } from 'asasvirtuais-react/forms'
+import { FieldsProvider } from 'asasvirtuais-react/src/fields'
+import { FormProvider } from 'asasvirtuais-react/src/forms'
 import { Props as ListProps, Result as ListResult } from 'asasvirtuais-tools/src/list/blueprint.js' // Assuming this is for filter props
-import { IBlueprint } from 'asasvirtuais-blueprint'
-import { createContextFromHook } from 'asasvirtuais-react/context'
+import { IBlueprint } from 'asasvirtuais-blueprint/src/index'
+import { createContextFromHook } from 'asasvirtuais-react/src/context'
 
 export function react<DatabaseSchema extends Record<string, { readable: z.SomeZodObject, writeable: z.SomeZodObject }>>(database: DatabaseSchema) {
 

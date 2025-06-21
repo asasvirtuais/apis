@@ -1,25 +1,15 @@
-// Doesn't work at all
-import z from 'zod'
-import database from './database'
-import { IBlueprint } from 'asasvirtuais-blueprint/src/index'
-
+import database from './database';
 // Goal: to use this function like so. route( blueprintInstance.implement )
-export function route<Params = any>(blueprint: IBlueprint<any, any>) {
-    return async (request: Request, { params }: { params: Promise<Params> }) => {
-        const resolvedParams = await params
-        const result = await blueprint({ request, params: resolvedParams })
-        return Response.json(result)
-    }
+export function route(blueprint) {
+    return async (request, { params }) => {
+        const resolvedParams = await params;
+        const result = await blueprint({ request, params: resolvedParams });
+        return Response.json(result);
+    };
 }
-
-export function server<DatabaseSchema extends Record<string, { readable: z.SomeZodObject, writeable: z.SomeZodObject }>>(databaseSchema: DatabaseSchema) {
-
-    type TableName = keyof DatabaseSchema & string
-
-    const { table } = database(databaseSchema)
-
+export function server(databaseSchema) {
+    const { table } = database(databaseSchema);
     // function nextRoutes<Table extends TableName>() {
-
     //     return {
     //         find(blueprint: IBlueprint<any, any>) {
     //             return route<{id: string}>(
@@ -48,9 +38,9 @@ export function server<DatabaseSchema extends Record<string, { readable: z.SomeZ
     //         },
     //     }
     // }
-
     return {
         // nextRoutes: nextRoutes,
         table,
-    }
+    };
 }
+//# sourceMappingURL=server.js.map

@@ -1,12 +1,12 @@
 // Doesn't work at all
 import z from 'zod'
-import database from './database'
-import { IBlueprint } from 'asasvirtuais-blueprint'
-import { findBP } from '@asasvirtuais/tools/find/blueprint.js'
-import { listBP } from '@asasvirtuais/tools/list/blueprint.js'
-import { createBP } from '@asasvirtuais/tools/create/blueprint.js'
-import { updateBP } from '@asasvirtuais/tools/update/blueprint.js'
-import { removeBP } from '@asasvirtuais/tools/remove/blueprint.js'
+// import database from './database'
+import { IBlueprint } from 'asasvirtuais-blueprint/src/index'
+// import { findBP } from '@asasvirtuais/tools/src/find/blueprint'
+// import { listBP } from '@asasvirtuais/tools/src/list/blueprint'
+// import { createBP } from '@asasvirtuais/tools/src/create/blueprint'
+// import { updateBP } from '@asasvirtuais/tools/src/update/blueprint'
+// import { removeBP } from '@asasvirtuais/tools/src/remove/blueprint'
 
 // Goal: to use this function like so. route( blueprintInstance.implement )
 export function route<Params = any>(blueprint: IBlueprint<any, any>) {

@@ -1,11 +1,11 @@
 // Works
 import z from 'zod'
-import createBP from 'asasvirtuais-tools/src/create/blueprint.js'
-import removeBP from 'asasvirtuais-tools/src/remove/blueprint.js'
-import findBP from 'asasvirtuais-tools/src/find/blueprint.js'
-import listBP from 'asasvirtuais-tools/src/list/blueprint.js'
-import updateBP from 'asasvirtuais-tools/src/update/blueprint.js'
-import blueprint from 'asasvirtuais-blueprint'
+import createBP from 'asasvirtuais-tools/src/create/blueprint'
+import removeBP from 'asasvirtuais-tools/src/remove/blueprint'
+import findBP from 'asasvirtuais-tools/src/find/blueprint'
+import listBP from 'asasvirtuais-tools/src/list/blueprint'
+import updateBP from 'asasvirtuais-tools/src/update/blueprint'
+import blueprint from 'asasvirtuais-blueprint/src/index'
 
 export default function fetcher<Database extends Record<string, { readable: z.SomeZodObject, writeable: z.SomeZodObject }>>(database: Database) {
 
