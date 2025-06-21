@@ -2,7 +2,6 @@
   "name": "asasvirtuais-apis",
   "description": "This projects exports typescript files do not attempt to change that",
   "version": "0.1.0",
-  "private": true,
   "exports": {
     "./*": "./dist/*",
     "./src/*": "./src/*"
