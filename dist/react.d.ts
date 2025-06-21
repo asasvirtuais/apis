@@ -12,8 +12,8 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -22,8 +22,9 @@ export declare function react<DatabaseSchema extends Record<string, {
             data: {};
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -33,8 +34,9 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -43,8 +45,8 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+        }, "table">, Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: (Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -52,8 +54,12 @@ export declare function react<DatabaseSchema extends Record<string, {
             table: string;
         } & {
             url?: string;
-        }, "table">, Promise<ListResult<{}>>> & {
-            result: Promise<ListResult<{}>> | null;
+        }, "table">, Promise<ListResult<{}>> & {
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
+        }> & {
+            result: (Promise<ListResult<{}>> & {
+                data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
+            }) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -71,8 +77,8 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -81,8 +87,9 @@ export declare function react<DatabaseSchema extends Record<string, {
             data: {};
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -92,8 +99,9 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -102,8 +110,8 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+        }, "table">, Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: (Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -111,8 +119,12 @@ export declare function react<DatabaseSchema extends Record<string, {
             table: string;
         } & {
             url?: string;
-        }, "table">, Promise<ListResult<{}>>> & {
-            result: Promise<ListResult<{}>> | null;
+        }, "table">, Promise<ListResult<{}>> & {
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
+        }> & {
+            result: (Promise<ListResult<{}>> & {
+                data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
+            }) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -130,8 +142,8 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -140,8 +152,9 @@ export declare function react<DatabaseSchema extends Record<string, {
             data: {};
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -151,8 +164,9 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -161,8 +175,8 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+        }, "table">, Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: (Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -170,8 +184,12 @@ export declare function react<DatabaseSchema extends Record<string, {
             table: string;
         } & {
             url?: string;
-        }, "table">, Promise<ListResult<{}>>> & {
-            result: Promise<ListResult<{}>> | null;
+        }, "table">, Promise<ListResult<{}>> & {
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
+        }> & {
+            result: (Promise<ListResult<{}>> & {
+                data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
+            }) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -192,8 +210,8 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -202,8 +220,9 @@ export declare function react<DatabaseSchema extends Record<string, {
             data: {};
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -213,8 +232,9 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
+        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
+            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -223,8 +243,8 @@ export declare function react<DatabaseSchema extends Record<string, {
             id: string;
         } & {
             url?: string;
-        }, "table">, Promise<{}>> & {
-            result: Promise<{}> | null;
+        }, "table">, Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: (Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>) | null;
             loading: boolean;
             error: Error | null;
         };
@@ -232,8 +252,12 @@ export declare function react<DatabaseSchema extends Record<string, {
             table: string;
         } & {
             url?: string;
-        }, "table">, Promise<ListResult<{}>>> & {
-            result: Promise<ListResult<{}>> | null;
+        }, "table">, Promise<ListResult<{}>> & {
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
+        }> & {
+            result: (Promise<ListResult<{}>> & {
+                data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
+            }) | null;
             loading: boolean;
             error: Error | null;
         };

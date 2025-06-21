@@ -10,9 +10,11 @@ import blueprint from 'asasvirtuais-blueprint/src/index'
 export default function fetcher<Database extends Record<string, { readable: z.SomeZodObject, writeable: z.SomeZodObject }>>(database: Database) {
 
     type TableName = keyof Database & string
+    type Readable = z.infer<Database[TableName]['readable']>
+    type Writable = z.infer<Database[TableName]['writeable']>
 
     const apis = {
-        find: findBP.toAsync().more<{url?: string}>(() => (
+        find: findBP.toAsync().more<{url?: string}, Readable>(() => (
             blueprint(
                 async ({url, table, id}) => {
                     const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`)
@@ -21,7 +23,7 @@ export default function fetcher<Database extends Record<string, { readable: z.So
                 }
             )
         )),
-        create: createBP.toAsync().more<{url?: string}>(() => (
+        create: createBP.toAsync().more<{url?: string, data: Writable}, Readable>(() => (
             blueprint(
                 async ({url, table, data}) => {
                     const response = await fetch(`${url ?? ''}/api/v1/${table}`, {
@@ -36,7 +38,7 @@ export default function fetcher<Database extends Record<string, { readable: z.So
                 }
             )
         )),
-        update: updateBP.toAsync().more<{url?: string}>(() => (
+        update: updateBP.toAsync().more<{url?: string, data: Writable}, Readable>(() => (
             blueprint(
                 async ({url, table, id, data}) => {
                     const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`, {
@@ -51,7 +53,7 @@ export default function fetcher<Database extends Record<string, { readable: z.So
                 }
             )
         )),
-        remove: removeBP.toAsync().more<{url?: string}>(() => (
+        remove: removeBP.toAsync().more<{url?: string}, Partial<Readable>>(() => (
             blueprint(
                 async ({url, table, id}) => {
                     const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`, {
@@ -62,7 +64,7 @@ export default function fetcher<Database extends Record<string, { readable: z.So
                 }
             )
         )),
-        list: listBP.toAsync().more<{url?: string}>(() => (
+        list: listBP.toAsync().more<{url?: string}, { data: Readable[] }>(() => (
             blueprint(
                 async ({url, table}) => {
                     const response = await fetch(`${url ?? ''}/api/v1/${table}`)
