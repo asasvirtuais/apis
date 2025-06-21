@@ -12,7 +12,7 @@ export function route<Params = any>(blueprint: IBlueprint<any, any>) {
     }
 }
 
-export function server<DatabaseSchema extends Record<string, { readable: z.SomeZodObject, writeable: z.SomeZodObject }>>(databaseSchema: DatabaseSchema) {
+export function server<DatabaseSchema extends Record<string, { readable: z.SomeZodObject, writable: z.SomeZodObject }>>(databaseSchema: DatabaseSchema) {
 
     type TableName = keyof DatabaseSchema & string
 

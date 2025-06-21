@@ -6,7 +6,7 @@ import updateBP from 'asasvirtuais-tools/src/update/blueprint.js';
 export default function database(database) {
     function table(tableName) {
         const module = database[tableName];
-        const { readable, writeable } = module;
+        const { readable, writable } = module;
         return {
             find: findBP
                 .enforce({ table: tableName })

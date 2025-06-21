@@ -5,7 +5,7 @@ export declare function route<Params = any>(blueprint: IBlueprint<any, any>): (r
 }) => Promise<Response>;
 export declare function server<DatabaseSchema extends Record<string, {
     readable: z.SomeZodObject;
-    writeable: z.SomeZodObject;
+    writable: z.SomeZodObject;
 }>>(databaseSchema: DatabaseSchema): {
     table: <T_Name extends keyof DatabaseSchema & string>(tableName: T_Name) => {
         find: IBlueprint<Omit<{

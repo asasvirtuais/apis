@@ -1,7 +1,7 @@
 import z from 'zod';
 export default function database<Database extends Record<string, {
     readable: z.SomeZodObject;
-    writeable: z.SomeZodObject;
+    writable: z.SomeZodObject;
 }>>(database: Database): {
     table: <T_Name extends keyof Database & string>(tableName: T_Name) => {
         find: import("asasvirtuais-blueprint/src").IBlueprint<Omit<{

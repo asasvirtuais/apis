@@ -4,62 +4,51 @@ import { Props as ListProps, Result as ListResult } from 'asasvirtuais-tools/src
 import { IBlueprint } from 'asasvirtuais-blueprint/src/index';
 export declare function react<DatabaseSchema extends Record<string, {
     readable: z.SomeZodObject;
-    writeable: z.SomeZodObject;
+    writable: z.SomeZodObject;
 }>>(database: DatabaseSchema): {
     DatabaseProvider: ({ children, ...props }: React.PropsWithChildren<{ [T in keyof DatabaseSchema & string]: {
         find: IBlueprint<Omit<{
-            table: string;
-            id: string;
-        } & {
             url?: string;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         create: IBlueprint<Omit<{
-            table: string;
-            data: {};
-        } & {
             url?: string;
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writable"]>;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         update: IBlueprint<Omit<{
-            table: string;
-            data: {};
-            id: string;
-        } & {
             url?: string;
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+            data: Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writable"]>>;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         remove: IBlueprint<Omit<{
-            table: string;
-            id: string;
-        } & {
             url?: string;
-        }, "table">, Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
-            result: (Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+        }, "table">, Promise<Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>>> & {
+            result: Promise<Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> | null;
             loading: boolean;
             error: Error | null;
         };
         list: IBlueprint<Omit<{
-            table: string;
-        } & {
             url?: string;
-        }, "table">, Promise<ListResult<{}>> & {
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
-        }> & {
-            result: (Promise<ListResult<{}>> & {
-                data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
-            }) | null;
+            table: keyof DatabaseSchema & string;
+        }, "table">, Promise<ListResult<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>>> & {
+            result: Promise<ListResult<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> | null;
             loading: boolean;
             error: Error | null;
         };
@@ -73,58 +62,47 @@ export declare function react<DatabaseSchema extends Record<string, {
     }; }>) => React.JSX.Element;
     useDatabase: () => { [T in keyof DatabaseSchema & string]: {
         find: IBlueprint<Omit<{
-            table: string;
-            id: string;
-        } & {
             url?: string;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         create: IBlueprint<Omit<{
-            table: string;
-            data: {};
-        } & {
             url?: string;
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writable"]>;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         update: IBlueprint<Omit<{
-            table: string;
-            data: {};
-            id: string;
-        } & {
             url?: string;
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+            data: Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writable"]>>;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         remove: IBlueprint<Omit<{
-            table: string;
-            id: string;
-        } & {
             url?: string;
-        }, "table">, Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
-            result: (Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+        }, "table">, Promise<Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>>> & {
+            result: Promise<Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> | null;
             loading: boolean;
             error: Error | null;
         };
         list: IBlueprint<Omit<{
-            table: string;
-        } & {
             url?: string;
-        }, "table">, Promise<ListResult<{}>> & {
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
-        }> & {
-            result: (Promise<ListResult<{}>> & {
-                data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
-            }) | null;
+            table: keyof DatabaseSchema & string;
+        }, "table">, Promise<ListResult<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>>> & {
+            result: Promise<ListResult<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> | null;
             loading: boolean;
             error: Error | null;
         };
@@ -138,58 +116,47 @@ export declare function react<DatabaseSchema extends Record<string, {
     }; };
     useTable: <T extends keyof DatabaseSchema & string>(name: T) => { [T_1 in keyof DatabaseSchema & string]: {
         find: IBlueprint<Omit<{
-            table: string;
-            id: string;
-        } & {
             url?: string;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         create: IBlueprint<Omit<{
-            table: string;
-            data: {};
-        } & {
             url?: string;
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writable"]>;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         update: IBlueprint<Omit<{
-            table: string;
-            data: {};
-            id: string;
-        } & {
             url?: string;
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+            data: Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writable"]>>;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         remove: IBlueprint<Omit<{
-            table: string;
-            id: string;
-        } & {
             url?: string;
-        }, "table">, Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
-            result: (Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+        }, "table">, Promise<Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>>> & {
+            result: Promise<Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> | null;
             loading: boolean;
             error: Error | null;
         };
         list: IBlueprint<Omit<{
-            table: string;
-        } & {
             url?: string;
-        }, "table">, Promise<ListResult<{}>> & {
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
-        }> & {
-            result: (Promise<ListResult<{}>> & {
-                data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
-            }) | null;
+            table: keyof DatabaseSchema & string;
+        }, "table">, Promise<ListResult<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>>> & {
+            result: Promise<ListResult<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> | null;
             loading: boolean;
             error: Error | null;
         };
@@ -206,58 +173,47 @@ export declare function react<DatabaseSchema extends Record<string, {
         asAbove?: Record<string, z.infer<DatabaseSchema[T]["readable"]>>;
     }) => {
         find: IBlueprint<Omit<{
-            table: string;
-            id: string;
-        } & {
             url?: string;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         create: IBlueprint<Omit<{
-            table: string;
-            data: {};
-        } & {
             url?: string;
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writable"]>;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         update: IBlueprint<Omit<{
-            table: string;
-            data: {};
-            id: string;
-        } & {
             url?: string;
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writeable"]>;
-        }, "table">, Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> & {
-            result: (Promise<{}> & z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+            data: Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["writable"]>>;
+        }, "table">, Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
+            result: Promise<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>> | null;
             loading: boolean;
             error: Error | null;
         };
         remove: IBlueprint<Omit<{
-            table: string;
-            id: string;
-        } & {
             url?: string;
-        }, "table">, Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> & {
-            result: (Promise<{}> & Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>) | null;
+            table: keyof DatabaseSchema & string;
+            id: string;
+        }, "table">, Promise<Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>>> & {
+            result: Promise<Partial<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> | null;
             loading: boolean;
             error: Error | null;
         };
         list: IBlueprint<Omit<{
-            table: string;
-        } & {
             url?: string;
-        }, "table">, Promise<ListResult<{}>> & {
-            data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
-        }> & {
-            result: (Promise<ListResult<{}>> & {
-                data: z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>[];
-            }) | null;
+            table: keyof DatabaseSchema & string;
+        }, "table">, Promise<ListResult<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>>> & {
+            result: Promise<ListResult<z.TypeOf<DatabaseSchema[keyof DatabaseSchema & string]["readable"]>>> | null;
             loading: boolean;
             error: Error | null;
         };
@@ -271,13 +227,13 @@ export declare function react<DatabaseSchema extends Record<string, {
     };
     forms: <T extends keyof DatabaseSchema & string>(name: T) => {
         CreateForm: ({ defaults, onSuccess, children }: {
-            defaults?: Partial<z.TypeOf<DatabaseSchema[T]["writeable"]>>;
+            defaults?: Partial<z.TypeOf<DatabaseSchema[T]["writable"]>>;
             onSuccess?: (result: z.TypeOf<DatabaseSchema[T]["readable"]>) => void;
             children: React.ReactNode;
         }) => React.JSX.Element;
         UpdateForm: ({ id, defaults, onSuccess, children }: {
             id: string;
-            defaults?: Partial<z.TypeOf<DatabaseSchema[T]["writeable"]>>;
+            defaults?: Partial<z.TypeOf<DatabaseSchema[T]["writable"]>>;
             onSuccess?: (result: z.TypeOf<DatabaseSchema[T]["readable"]>) => void;
             children: React.ReactNode;
         }) => React.JSX.Element;

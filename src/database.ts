@@ -6,7 +6,7 @@ import findBP from 'asasvirtuais-tools/src/find/blueprint.js'
 import listBP from 'asasvirtuais-tools/src/list/blueprint.js'
 import updateBP from 'asasvirtuais-tools/src/update/blueprint.js'
 
-export default function database<Database extends Record<string, { readable: z.SomeZodObject, writeable: z.SomeZodObject }>>(database: Database) {
+export default function database<Database extends Record<string, { readable: z.SomeZodObject, writable: z.SomeZodObject }>>(database: Database) {
 
     type TableName = keyof Database & string
 
@@ -14,10 +14,10 @@ export default function database<Database extends Record<string, { readable: z.S
 
         const module = database[tableName]
 
-        const { readable, writeable } = module
+        const { readable, writable } = module
 
         type readable = z.infer<typeof readable>
-        type writeable = z.infer<typeof writeable>
+        type Writable = z.infer<typeof writable>
 
         return {
             find: findBP
@@ -26,14 +26,14 @@ export default function database<Database extends Record<string, { readable: z.S
 
             create: createBP
                 .enforce({ table: tableName }) 
-                .input(({data, ...props}) => ({ ...props, data: data as writeable }))
+                .input(({data, ...props}) => ({ ...props, data: data as Writable }))
                 .output(async (promise) => (await promise) as readable),
 
             update: updateBP
                 .enforce({ table: tableName }) 
                 .input((props) => {
                     const { id, data } = props;
-                    return { id, data: data as Partial<writeable> };
+                    return { id, data: data as Partial<Writable> };
                 })
                 .output(async (promise) => (await promise) as readable),
 

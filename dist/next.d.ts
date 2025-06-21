@@ -5,7 +5,7 @@ export declare function route<Params = any>(blueprint: IBlueprint<any, any>): (r
 }) => Promise<Response>;
 export declare function databaseRouter<DatabaseSchema extends Record<string, {
     readable: z.SomeZodObject;
-    writeable: z.SomeZodObject;
+    writable: z.SomeZodObject;
 }>>(databaseCRUD: {
     [K in keyof DatabaseSchema]: {
         find: IBlueprint<any, any>;

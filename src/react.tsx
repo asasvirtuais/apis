@@ -10,7 +10,7 @@ import { Props as ListProps, Result as ListResult } from 'asasvirtuais-tools/src
 import { IBlueprint } from 'asasvirtuais-blueprint/src/index'
 import { createContextFromHook } from 'asasvirtuais-react/src/context'
 
-export function react<DatabaseSchema extends Record<string, { readable: z.SomeZodObject, writeable: z.SomeZodObject }>>(database: DatabaseSchema) {
+export function react<DatabaseSchema extends Record<string, { readable: z.SomeZodObject, writable: z.SomeZodObject }>>(database: DatabaseSchema) {
 
     type TableName = keyof DatabaseSchema & string
 
@@ -103,13 +103,13 @@ export function react<DatabaseSchema extends Record<string, { readable: z.SomeZo
     }
 
     function forms<T extends TableName>(name: T) {
-        type readable = z.infer<DatabaseSchema[T]['readable']>
-        type writeable = z.infer<DatabaseSchema[T]['writeable']>
+        type Readable = z.infer<DatabaseSchema[T]['readable']>
+        type Writable = z.infer<DatabaseSchema[T]['writable']>
 
         // --- CreateForm ---
         type CreateFormProps = {
-            defaults?: Partial<writeable>
-            onSuccess?: (result: readable) => void
+            defaults?: Partial<Writable>
+            onSuccess?: (result: Readable) => void
             children: React.ReactNode
         }
 
@@ -117,14 +117,14 @@ export function react<DatabaseSchema extends Record<string, { readable: z.SomeZo
             const { create } = useTable(name)
 
             const handleSubmit = useCallback(
-                async (fields: writeable) => {
+                async (fields: Writable) => {
                     await create({ data: fields }).then(onSuccess)
                 },
             [create, onSuccess] )
 
             return (
-                <FieldsProvider<writeable> defaults={defaults || {} as writeable}>
-                    <FormProvider<writeable> onSubmit={handleSubmit}>
+                <FieldsProvider<Writable> defaults={defaults || {} as Writable}>
+                    <FormProvider<Writable> onSubmit={handleSubmit}>
                         {children}
                     </FormProvider>
                 </FieldsProvider>
@@ -134,21 +134,21 @@ export function react<DatabaseSchema extends Record<string, { readable: z.SomeZo
         // --- UpdateForm ---
         type UpdateFormProps = {
             id: string // ID of the item to update
-            defaults?: Partial<writeable>
-            onSuccess?: (result: readable) => void
+            defaults?: Partial<Writable>
+            onSuccess?: (result: Readable) => void
             children: React.ReactNode
         }
 
         function UpdateForm({ id, defaults, onSuccess, children }: UpdateFormProps) {
             const { update } = useTable(name)
             
-            const handleSubmit = useCallback(async (fields: Partial<writeable>) => {
+            const handleSubmit = useCallback(async (fields: Partial<Writable>) => {
                 await update({ id, data: fields }).then(onSuccess)
             }, [update, id, onSuccess])
 
             return (
-                <FieldsProvider<Partial<writeable>> defaults={defaults || {} as Partial<writeable>}>
-                    <FormProvider<Partial<writeable>> onSubmit={handleSubmit}>
+                <FieldsProvider<Partial<Writable>> defaults={defaults || {} as Partial<Writable>}>
+                    <FormProvider<Partial<Writable>> onSubmit={handleSubmit}>
                         {children}
                     </FormProvider>
                 </FieldsProvider>
@@ -158,21 +158,21 @@ export function react<DatabaseSchema extends Record<string, { readable: z.SomeZo
         // --- FilterForm (for listing items) ---
         // Assuming ListProps is the type for filter parameters
         type FilterFormProps = {
-            defaults?: Partial<ListProps<readable>>
-            onSuccess?: (result: ListResult<readable>) => void
+            defaults?: Partial<ListProps<Readable>>
+            onSuccess?: (result: ListResult<Readable>) => void
             children: React.ReactNode
         }
 
         function FilterForm({ defaults, onSuccess, children }: FilterFormProps) {
             const { list } = useTable(name)
 
-            const handleSubmit = useCallback(async (fields: Omit<ListProps<readable>, 'table'>) => {
+            const handleSubmit = useCallback(async (fields: Omit<ListProps<Readable>, 'table'>) => {
                 await list(fields).then(onSuccess)
             }, [list, onSuccess])
 
             return (
-                <FieldsProvider<ListProps<readable>> defaults={(defaults || {} )as ListProps<readable>}>
-                    <FormProvider<ListProps<readable>> onSubmit={handleSubmit}>
+                <FieldsProvider<ListProps<Readable>> defaults={(defaults || {} )as ListProps<Readable>}>
+                    <FormProvider<ListProps<Readable>> onSubmit={handleSubmit}>
                         {children}
                     </FormProvider>
                 </FieldsProvider>

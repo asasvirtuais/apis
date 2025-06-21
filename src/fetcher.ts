@@ -1,78 +1,64 @@
 // Works
 import z from 'zod'
-import createBP from 'asasvirtuais-tools/src/create/blueprint'
-import removeBP from 'asasvirtuais-tools/src/remove/blueprint'
-import findBP from 'asasvirtuais-tools/src/find/blueprint'
-import listBP from 'asasvirtuais-tools/src/list/blueprint'
-import updateBP from 'asasvirtuais-tools/src/update/blueprint'
 import blueprint from 'asasvirtuais-blueprint/src/index'
+import { Result as ListResult } from 'asasvirtuais-tools/src/list/blueprint'
 
-export default function fetcher<Database extends Record<string, { readable: z.SomeZodObject, writeable: z.SomeZodObject }>>(database: Database) {
+export default function fetcher<Database extends Record<string, { readable: z.SomeZodObject, writable: z.SomeZodObject }>>(database: Database) {
 
     type TableName = keyof Database & string
     type Readable = z.infer<Database[TableName]['readable']>
-    type Writable = z.infer<Database[TableName]['writeable']>
+    type Writable = z.infer<Database[TableName]['writable']>
 
     const apis = {
-        find: findBP.toAsync().more<{url?: string}, Readable>(() => (
-            blueprint(
-                async ({url, table, id}) => {
-                    const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`)
-                    const result = await response.json()
-                    return result
-                }
-            )
-        )),
-        create: createBP.toAsync().more<{url?: string, data: Writable}, Readable>(() => (
-            blueprint(
-                async ({url, table, data}) => {
-                    const response = await fetch(`${url ?? ''}/api/v1/${table}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    })
-                    const result = await response.json()
-                    return result
-                }
-            )
-        )),
-        update: updateBP.toAsync().more<{url?: string, data: Writable}, Readable>(() => (
-            blueprint(
-                async ({url, table, id, data}) => {
-                    const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    })
-                    const result = await response.json()
-                    return result
-                }
-            )
-        )),
-        remove: removeBP.toAsync().more<{url?: string}, Partial<Readable>>(() => (
-            blueprint(
-                async ({url, table, id}) => {
-                    const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`, {
-                        method: 'DELETE',
-                    })
-                    const result = await response.json()
-                    return result
-                }
-            )
-        )),
-        list: listBP.toAsync().more<{url?: string}, { data: Readable[] }>(() => (
-            blueprint(
-                async ({url, table}) => {
-                    const response = await fetch(`${url ?? ''}/api/v1/${table}`)
-                    const result = await response.json()
-                    return result
-                }
-            )
-        )),
+        find: blueprint(
+            async ({url, table, id}: { url?: string, table: TableName, id: string }) => {
+                const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`)
+                const result = await response.json()
+                return result as Readable
+            }
+        ),
+        create: blueprint(
+            async ({url, table, data}: { url?: string, table: TableName, data: Writable }) => {
+                const response = await fetch(`${url ?? ''}/api/v1/${table}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                const result = await response.json()
+                return result as Readable
+            }
+        ),
+        update: blueprint(
+            async ({url, table, id, data}: { url?: string, table: TableName, id: string, data: Partial<Writable> }) => {
+                const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                const result = await response.json()
+                return result as Readable
+            }
+        ),
+        remove: blueprint(
+            async ({url, table, id}: { url?: string, table: TableName, id: string }) => {
+                const response = await fetch(`${url ?? ''}/api/v1/${table}/${id}`, {
+                    method: 'DELETE',
+                })
+                const result = await response.json()
+                return result as Partial<Readable>
+            }
+        ),
+        list: blueprint(
+            async ({url, table}: { url?: string, table: TableName }) => {
+                const response = await fetch(`${url ?? ''}/api/v1/${table}`)
+                const result = await response.json()
+                return result as ListResult<Readable>
+            }
+        )
     }
 
     function api<T extends TableName>(table: T) {
